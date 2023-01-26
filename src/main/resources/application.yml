@@ -1,0 +1,13 @@
+spring:
+  main:
+    banner_mode: 'OFF'
+  profiles:
+    active: production
+  servlet:
+    multipart:
+      max-file-size: 500MB
+      max-request-size: 500MB
+aws-client:
+  textractUrl: "https://textract.us-east-1.amazonaws.com"
+  region: "us-east-1"
+  s3Bucket: "veits"
