@@ -9,7 +9,6 @@ import java.util.List;
 import java.util.Optional;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
-import org.springframework.web.multipart.MultipartFile;
 
 @Service
 @AllArgsConstructor
@@ -17,8 +16,8 @@ public class AwsTextractService {
 
     private AwsClient awsClient;
 
-    public List<ProductData> findText(MultipartFile file, List<String> dietBadProducts) {
-        Optional<DetectDocumentTextResult> result = awsClient.findText(file);
+    public List<ProductData> findText(String fileName, List<String> dietBadProducts) {
+        Optional<DetectDocumentTextResult> result = awsClient.findText(fileName);
 
         if (result.isEmpty()) {
             return new ArrayList<>();
