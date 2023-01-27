@@ -10,4 +10,4 @@ spring:
 aws-client:
   textractUrl: "https://textract.us-east-1.amazonaws.com"
   region: "us-east-1"
-  s3Bucket: "veits"
+  s3Bucket: "veits100129-staging"
