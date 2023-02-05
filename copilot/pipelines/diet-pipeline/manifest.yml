@@ -15,7 +15,7 @@ source:
   provider: GitHub
   # Additional properties that further specify the location of the artifacts.
   properties:
-    branch: DIET-11
+    branch: master
     repository: https://github.com/DietHelperApp/dietHelperService
     # Optional: specify the name of an existing CodeStar Connections connection.
     # connection_name: a-connection
