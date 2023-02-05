@@ -1,0 +1,7 @@
+version: '3'
+services:
+  diethelper:
+    container_name: diet-helper-service
+    image: diet-helper:v1
+    ports:
+      - 8080:8080

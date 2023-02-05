@@ -24,6 +24,11 @@ public class AnalyzeTextController {
         return ResponseEntity.status(HttpStatus.OK).body(awsTextractService.findText(fileName, dietBadProducts));
     }
 
+    @GetMapping("/")
+    public ResponseEntity health() {
+        return ResponseEntity.status(HttpStatus.OK).build();
+    }
+
     @ExceptionHandler(Exception.class)
     public ResponseEntity<String> handleAllExceptions(Exception e) {
         return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());

@@ -23,12 +23,23 @@ public class AwsTextractService {
             return new ArrayList<>();
         }
 
-        return result.get().getBlocks().stream()
-                .map(Block::getText)
-                .filter(txt -> txt != null && dietBadProducts.stream().anyMatch(pr -> txt.toUpperCase().contains(pr.toUpperCase())))
-                .map(tx -> ProductData.builder()
-                        .productName(tx)
-                        .build()
-                ).toList();
+        List<ProductData> badProducts = new ArrayList<>();
+
+        for (String badProduct : dietBadProducts) {
+            Optional<String> foundText = result.get().getBlocks().stream()
+                    .map(Block::getText)
+                    .filter(text -> text != null && text.toUpperCase().contains(badProduct.toUpperCase()))
+                    .findFirst();
+
+            if (foundText.isPresent()) {
+                ProductData productData = ProductData.builder()
+                        .productName(badProduct)
+                        .build();
+
+                badProducts.add(productData);
+            }
+        }
+
+        return badProducts;
     }
 }
