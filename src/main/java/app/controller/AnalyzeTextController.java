@@ -9,6 +9,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
@@ -22,6 +23,11 @@ public class AnalyzeTextController {
             @RequestParam("fileName") String fileName,
             @RequestParam("dietBadProducts") List<String> dietBadProducts) {
         return ResponseEntity.status(HttpStatus.OK).body(awsTextractService.findText(fileName, dietBadProducts));
+    }
+
+    @PostMapping("/")
+    public ResponseEntity healthPost() {
+        return ResponseEntity.status(HttpStatus.OK).build();
     }
 
     @GetMapping("/")
