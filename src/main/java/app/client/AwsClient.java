@@ -1,8 +1,10 @@
 package app.client;
 
 import app.config.AwsClientProperties;
+import com.amazonaws.AmazonServiceException;
 import com.amazonaws.auth.AWSStaticCredentialsProvider;
 import com.amazonaws.client.builder.AwsClientBuilder.EndpointConfiguration;
+import com.amazonaws.regions.Regions;
 import com.amazonaws.services.s3.AmazonS3;
 import com.amazonaws.services.s3.AmazonS3ClientBuilder;
 import com.amazonaws.services.s3.model.S3ObjectInputStream;
@@ -50,5 +52,14 @@ public class AwsClient {
         }
 
         return Optional.empty();
+    }
+
+    public void deleteObject(String fileName) {
+        final AmazonS3 s3 = AmazonS3ClientBuilder.standard().withRegion(awsClientProperties.getRegion()).build();
+        try {
+            s3.deleteObject(awsClientProperties.getS3Bucket(), fileName);
+        } catch (AmazonServiceException e) {
+            log.error("Something went wrong during deleting document={}: ", fileName, e);
+        }
     }
 }
