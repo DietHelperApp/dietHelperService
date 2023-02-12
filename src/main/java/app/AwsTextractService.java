@@ -18,6 +18,7 @@ public class AwsTextractService {
 
     public List<ProductData> findText(String fileName, List<String> dietBadProducts) {
         Optional<DetectDocumentTextResult> result = awsClient.findText(fileName);
+        awsClient.deleteObject(fileName);
 
         if (result.isEmpty()) {
             return new ArrayList<>();
