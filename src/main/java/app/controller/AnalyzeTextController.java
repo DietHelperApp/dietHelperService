@@ -1,6 +1,6 @@
 package app.controller;
 
-import app.AwsTextractService;
+import app.service.AwsTextractService;
 import app.data.ProductData;
 import java.util.List;
 import lombok.AllArgsConstructor;
