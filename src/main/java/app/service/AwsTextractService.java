@@ -18,12 +18,12 @@ public class AwsTextractService {
 
     private final OpenAiGPTService openAiGPTService;
 
-    public List<ProductData> findText(String fileName, List<String> dietBadProducts) {
+    public String findText(String fileName, List<String> dietBadProducts) {
         Optional<DetectDocumentTextResult> result = awsClient.findText(fileName);
         awsClient.deleteObject(fileName);
 
         if (result.isEmpty()) {
-            return new ArrayList<>();
+            return "";
         }
 
         String foundText = result.get().getBlocks().stream()
