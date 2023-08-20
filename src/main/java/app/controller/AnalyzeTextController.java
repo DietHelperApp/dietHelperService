@@ -19,7 +19,7 @@ public class AnalyzeTextController {
     private final AwsTextractService awsTextractService;
 
     @GetMapping(path = "/products/bad")
-    public ResponseEntity<List<ProductData>> getBadProducts(
+    public ResponseEntity<String> getBadProducts(
             @RequestParam("fileName") String fileName,
             @RequestParam("dietBadProducts") List<String> dietBadProducts) {
         return ResponseEntity.status(HttpStatus.OK).body(awsTextractService.findText(fileName, dietBadProducts));
