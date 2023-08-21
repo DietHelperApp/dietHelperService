@@ -29,9 +29,12 @@ public class OpenAiGPTService {
             prompt += product + ",";
         }
 
-        String endPrompt = "Текст состава:" + text + ". Список аллергенов:" + prompt + ". " +
-                "Языки текста состава и списка аллергенов могут отличаться. Напиши только в ответе через запятую аллергены из списка, " +
-                "которые содержатся в данном составе, на языке, на котором они написаны в списке.";
+        String endPrompt = "Языки списка аллергенов (1) и текста состава (2) могут отличаться. " +
+                "Напиши через запятую только те продукты из списка аллергенов (1), которые ты нашел в тексте состава (2), " +
+                "исключая те, которых нет в списке аллергенов (1). Ответ напиши на языке, на котором написаны продукты из списка аллергенов (1). " +
+                "В том случае, если ты ничего не нашел - напиши в ответе \"0\"." +
+                "Список аллергенов (1):" + prompt +
+                ". Текст состава (2):" + text;
 
         List<ChatMessage> messages = new ArrayList<>();
         ChatMessage userMessage = new ChatMessage(ChatMessageRole.USER.value(), endPrompt);
@@ -44,13 +47,6 @@ public class OpenAiGPTService {
                 .maxTokens(1000)
                 .build();
 
-        String result = openAiService.createChatCompletion(completionRequest).getChoices().get(0).getMessage().getContent();
-        String[] splittedResult = result.split(":");
-
-        if (splittedResult.length > 1) {
-            return splittedResult[1];
-        }
-
-        return "";
+        return openAiService.createChatCompletion(completionRequest).getChoices().get(0).getMessage().getContent();
     }
 }
